@@ -1,0 +1,19 @@
+body {
+    background-color: cadetblue;
+    font-family: sans-serif;
+    text-align: center;
+    margin-top: 300px;
+}
+
+#todoInput {
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 15px;
+}
+
+#addBtn {
+    border-radius: 4px;
+    padding: 5px;
+    background-color: pink;
+    font-size: 15px;
+}
