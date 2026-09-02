@@ -15,4 +15,27 @@ fetch("https://jsonplaceholder.typicode.com/todos")
 })    
     
 });
+let addBtn = document.querySelector("#addBtn");
+
+addBtn.addEventListener("click",function(){
+    let newTodo = document.querySelector("#todoInput").value;
+
+    fetch("https://jsonplaceholder.typicode.com/todos", {   
+     method: "POST",
+     body: JSON.stringify({title: newTodo, completed: false})   
+    })
+
+    .then(function(response){
+        return response.json()
+    })
+
+    .then(function(data){
+        let todoList = document.querySelector("#todoList")
+        console.log(data);
+        todoList.innerHTML += "<li>" + newTodo + "</li>"
+    })
+
+  
+
+})
 
