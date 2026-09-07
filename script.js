@@ -11,10 +11,11 @@ fetch("https://jsonplaceholder.typicode.com/todos")
 
         data.forEach(function(item){
         console.log(item.title)
-        todoList.innerHTML += "<li>" + item.title + "</li>";
-})    
-    
-});
+        todoList.innerHTML += "<li>" + "<input type='checkbox' data-id='" + item.id + "'>" + item.title + "</li>";
+});  
+
+    });
+
 let addBtn = document.querySelector("#addBtn");
 
 addBtn.addEventListener("click",function(){
@@ -35,7 +36,18 @@ addBtn.addEventListener("click",function(){
         todoList.innerHTML += "<li>" + newTodo + "</li>"
     })
 
-  
+}) 
 
+
+let todoList = document.querySelector("#todoList");
+
+
+todoList.addEventListener("click", function(event){
+    let todoId = event.target.dataset.id
+    console.log(todoId);
+
+    fetch("https://jsonplaceholder.typicode.com/todos" + "/" + todoId, {
+        method: "PUT",
+        body: JSON.stringify({completed: true})
+    })
 })
-
