@@ -11,7 +11,7 @@ fetch("https://jsonplaceholder.typicode.com/todos")
 
         data.forEach(function(item){
         console.log(item.title)
-        todoList.innerHTML += "<li>" + "<input type='checkbox' data-id='" + item.id + "'>" + item.title + "</li>";
+        todoList.innerHTML += "<li>" + "<input type='checkbox' data-id='" + item.id + "'>" + item.title + "<button data-id='" + item.id + "'>Delete</button>" + "</li>";
 });  
 
     });
@@ -45,9 +45,20 @@ let todoList = document.querySelector("#todoList");
 todoList.addEventListener("click", function(event){
     let todoId = event.target.dataset.id
     console.log(todoId);
-
-    fetch("https://jsonplaceholder.typicode.com/todos" + "/" + todoId, {
+    console.log(event.target.tagName);
+    if (event.target.tagName === "INPUT"){
+        fetch("https://jsonplaceholder.typicode.com/todos" + "/" + todoId, {
         method: "PUT",
         body: JSON.stringify({completed: true})
+        
     })
-})
+    }else if (event.target.tagName === "BUTTON"){
+        fetch("https://jsonplaceholder.typicode.com/todos" + "/" + todoId, {
+        method: "DELETE"
+        })
+        .then(function(response){
+            event.target.closest("li").remove()
+        })
+    }
+    
+})   
